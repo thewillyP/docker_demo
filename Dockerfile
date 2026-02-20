@@ -16,5 +16,9 @@ SHELL ["/bin/bash", "-c"]
 WORKDIR /workspace
 
 COPY ./requirements.txt ./requirements.txt
+COPY ./entrypoint.sh /entrypoint.sh
 
-RUN uv pip install --system --no-cache -r requirements.txt
+RUN uv pip install --system --no-cache -r requirements.txt \
+    && chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
